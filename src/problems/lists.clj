@@ -45,3 +45,11 @@
       (my-reverseo b d)
       (appendo d c ys))))
 
+; 1.05
+
+(defn my-palindrome
+  "Relation which succeeds if xs is a palindrome"
+  [xs z]
+  (conde
+    ((my-reverseo xs xs) (== z s#))))
+
