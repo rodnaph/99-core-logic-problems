@@ -33,7 +33,7 @@
   ([[a . _] 0 _] (== a x))
   [[[_ . a] b _] (my-kth (dec b) x)])
 
-; 1.04 - Reverse a list
+; 1.04
 
 (defne my-reverseo
   "Relation where ys is the reverse of xs"
@@ -52,4 +52,32 @@
   [xs z]
   (conde
     ((my-reverseo xs xs) (== z s#))))
+
+; 1.07 - todo
+
+(defne my-listo
+  "Relation where xs is a list"
+  [xs x]
+  ([() _] (== x s#))
+  ([[a . b] _]
+   (fresh [c]
+     (my-listo b x))))
+
+(run 1 [q]
+  (my-flatteno [1 [2] 2 3] q))
+
+(defne my-flatteno
+  "Relation where ys is a flattened xs"
+  [xs ys]
+  ([() _] (== ys ()))
+  ([[a . b] _]
+    (== b ())
+    (conso a () ys))
+  ([[a . b] _]
+    (fresh [d e f]
+      (my-listo a f)
+      (my-flatteno a d)
+      (my-flatteno b e)
+      (appendo d e ys))))
+
 
